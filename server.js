@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const task = cron.schedule(
-  "0 0 0 * * *",
+  "* * * * *",
   () => {
     fs.readFile("./data.json", (err, data) => {
       if (err) {
