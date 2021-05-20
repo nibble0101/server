@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-server": "nodemon server.js"
+    "start-server": "nodemon server.js",
+    "ping-server": "echo \"About to ping server\" && node ping.js && echo \"Just pinged server\""
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,8 @@
     "nodemon": "^2.0.7"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-cron": "^3.0.0"
   }

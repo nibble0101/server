@@ -1,13 +1,16 @@
 const express = require("express");
 const cron = require("node-cron");
 const fs = require("fs");
+const cors = require("cors");
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+app.use(cors());
+
 const task = cron.schedule(
-  "0 11,12,13,14 * * *",
+  "0 0 23,6,11,2 * * *",
   () => {
     fs.readFile("./data.json", (err, data) => {
       if (err) {
@@ -29,6 +32,11 @@ const task = cron.schedule(
 );
 
 task.start();
+
+app.get("/ping", (req, res) => {
+  const date = new Date().toISOString();
+  res.json({ date });
+});
 
 app.get("/", (req, res) => {
   fs.readFile("./data.json", (err, data) => {
