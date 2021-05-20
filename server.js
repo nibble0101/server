@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 const task = cron.schedule(
-  "0 0 23,6,11,2 * * *",
+  "1 1 23,6,11,2 * * *",
   () => {
     fs.readFile("./data.json", (err, data) => {
       if (err) {
