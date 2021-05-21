@@ -9,27 +9,23 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-const task = cron.schedule(
-  "1 1 23,6,11,2 * * *",
-  () => {
-    fs.readFile("./data.json", (err, data) => {
+const task = cron.schedule("5 * 21 5 *", () => {
+  fs.readFile("./data.json", (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    data = JSON.parse(data);
+    data.push(new Date().toISOString());
+    fs.writeFile("./data.json", JSON.stringify(data, null, 2), (err) => {
       if (err) {
         console.log(err);
         return;
       }
-      data = JSON.parse(data);
-      data.push(new Date().toISOString());
-      fs.writeFile("./data.json", JSON.stringify(data, null, 2), (err) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        console.log("Written successfully to file");
-      });
+      console.log("Written successfully to file");
     });
-  },
-  { scheduled: true, timezone: "Africa/Nairobi" }
-);
+  });
+});
 
 task.start();
 
