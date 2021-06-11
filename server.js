@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-const task = cron.schedule("5 * 21 5 *", () => {
+const task = cron.schedule("5 * 12 6 *", () => {
   fs.readFile("./data.json", (err, data) => {
     if (err) {
       console.log(err);
@@ -31,6 +31,7 @@ task.start();
 
 app.get("/ping", (req, res) => {
   const date = new Date().toISOString();
+  task.start();
   res.json({ date });
 });
 
